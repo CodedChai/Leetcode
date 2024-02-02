@@ -4,6 +4,9 @@ fun main() {
   gcdOfStrings("ABABAB", "ABAB").also { println(it) }
 }
 
+/**
+ * GCD has to abide by the commutative property and then we can literally just do a mathematical GCD to get the substring
+ */
 fun gcdOfStrings(str1: String, str2: String): String {
   if (str1 + str2 != str2 + str1) {
     return ""
