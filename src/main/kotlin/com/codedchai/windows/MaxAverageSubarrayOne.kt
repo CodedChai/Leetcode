@@ -8,15 +8,22 @@ fun main() {
 }
 
 fun findMaxAverage(nums: IntArray, k: Int): Double {
-  var currentMax = nums.take(k).sum()
+  var currentSum = 0
+  var tailIndex = 0
+  var headIndex = 0
 
-  for (i in 1..nums.size - k) {
-    var windowSum = 0
-    for (j in i until i + k) {
-      windowSum += nums[j]
-    }
-    currentMax = max(currentMax, windowSum)
+  while (headIndex < k) {
+    currentSum += nums[headIndex]
+    headIndex++
+  }
+  var currentMax = currentSum
+
+  while (headIndex < nums.size) {
+    currentSum += nums[headIndex] - nums[tailIndex]
+    currentMax = max(currentMax, currentSum)
+    tailIndex++
+    headIndex++
   }
 
-  return currentMax.toDouble() / k.toDouble()
+  return currentMax / k.toDouble()
 }
