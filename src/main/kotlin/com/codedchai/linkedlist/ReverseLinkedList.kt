@@ -1,5 +1,7 @@
 package com.codedchai.linkedlist
 
+import com.codedchai.ListNode
+
 fun main() {
   val head = ListNode(5)
   val tail = ListNode(2)
@@ -37,8 +39,4 @@ fun reverseList(head: ListNode?): ListNode? {
     currentNode = nextNode
   }
   return previousNode
-}
-
-class ListNode(var `val`: Int) {
-  var next: ListNode? = null
 }
