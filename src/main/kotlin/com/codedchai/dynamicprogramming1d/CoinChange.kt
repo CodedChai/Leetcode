@@ -8,24 +8,28 @@ fun main() {
 }
 
 fun coinChange(coins: IntArray, amount: Int): Int {
-  val remainingAmountToCoinsUsed = mutableMapOf(Pair(amount, 0))
-  val remainingAmountQueue = mutableListOf(amount)
-
-  while (remainingAmountQueue.isNotEmpty()) {
-    val currentRemainingAmount = remainingAmountQueue.removeFirst()
-    val currentCoinsUsed = remainingAmountToCoinsUsed[currentRemainingAmount] ?: 0
-    coins.forEach { coin ->
-      val newRemainingAmount = currentRemainingAmount - coin
-      if (newRemainingAmount >= 0) {
-        val currentCoinsInCache = remainingAmountToCoinsUsed[newRemainingAmount] ?: Int.MAX_VALUE
-        if (currentCoinsUsed + 1 < currentCoinsInCache) {
-          remainingAmountQueue.add(newRemainingAmount)
-          remainingAmountToCoinsUsed[newRemainingAmount] = currentCoinsUsed + 1
+  val amountCache = (0..amount).map { Int.MAX_VALUE }.toMutableList()
+  amountCache[0] = 0
+  (1..amount).forEach { amountToCheck ->
+    val valueToAdd = coins.minOf { coin ->
+      val index = amountToCheck - coin
+      if (index < 0) {
+        Int.MAX_VALUE
+      } else {
+        val existingValue = amountCache[index]
+        if (existingValue == Int.MAX_VALUE) {
+          Int.MAX_VALUE
+        } else {
+          existingValue + 1
         }
       }
-
     }
+    amountCache[amountToCheck] = valueToAdd
   }
-
-  return remainingAmountToCoinsUsed[0] ?: -1
+  val minCoins = amountCache.last()
+  return if (minCoins == Int.MAX_VALUE) {
+    -1
+  } else {
+    minCoins
+  }
 }
