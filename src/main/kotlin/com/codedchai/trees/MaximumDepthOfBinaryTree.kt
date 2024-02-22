@@ -1,5 +1,6 @@
 package com.codedchai.trees
 
+import com.codedchai.TreeNode
 import kotlin.math.max
 
 fun maxDepth(root: TreeNode?): Int {
@@ -7,7 +8,3 @@ fun maxDepth(root: TreeNode?): Int {
   return max(maxDepth(root.left), maxDepth(root.right)) + 1
 }
 
-class TreeNode(var `val`: Int) {
-  var left: TreeNode? = null
-  var right: TreeNode? = null
-}
