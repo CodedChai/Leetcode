@@ -1,4 +1,4 @@
-package com.codedchai.dynamicprogramming1d
+package com.codedchai.arrays
 
 fun main() {
 
