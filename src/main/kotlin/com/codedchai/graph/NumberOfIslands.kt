@@ -1,4 +1,4 @@
-package com.codedchai.heap
+package com.codedchai.graph
 
 fun main() {
     data class Coordinate(
