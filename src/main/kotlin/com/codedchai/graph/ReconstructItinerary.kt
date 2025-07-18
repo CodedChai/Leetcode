@@ -6,7 +6,7 @@ class ReconstructItinerary {
     // Eulerian path
     fun findItinerary(tickets: List<List<String>>): List<String> {
 
-        // Lexigraphical naming is the tie breaker so we must sort
+        // Lexicographical naming is the tiebreaker so we must sort
         val graph = mutableMapOf<String, PriorityQueue<String>>()
         tickets.forEach { ticket ->
             graph.computeIfAbsent(ticket[0]) {
@@ -14,7 +14,6 @@ class ReconstructItinerary {
             }.add(ticket[1])
         }
 
-        // EVERY flight starts at "JFK"
         val route = mutableListOf<String>()
 
         fun dfs(airportCode: String) {
@@ -27,6 +26,7 @@ class ReconstructItinerary {
             route.add(0, airportCode)
         }
 
+        // EVERY flight starts at "JFK"
         dfs("JFK")
         return route
     }
